@@ -13,6 +13,9 @@
                 <v-list-tile-title class="title">
                   Personal Details
                 </v-list-tile-title>
+                <v-list-tile-action-text>
+                  <v-btn color="green" v-on:click="editenable()">Edit</v-btn>
+                </v-list-tile-action-text>
               </v-list-tile>
             </v-list>
           </v-toolbar>
@@ -24,6 +27,7 @@
                   v-model="user.fstname"
                   label="First Name:"
                   box
+                  :readonly=isDisabled
                 ></v-text-field>
               </v-flex>
               <v-flex xs12 sm12>
@@ -31,6 +35,7 @@
                   v-model="user.lstname"
                   label="Last Name:"
                   box
+                  :readonly=isDisabled
                 ></v-text-field>
               </v-flex>
               <v-flex xs12 sm12>
@@ -38,6 +43,7 @@
                   v-model="user.email"
                   label="Email"
                   box
+                  :readonly=isDisabled
                 ></v-text-field>
               </v-flex>
               <v-flex xs12 sm12>
@@ -45,6 +51,7 @@
                   v-model="user.username"
                   label="Username"
                   box
+                  disabled
                 ></v-text-field>
               </v-flex>
             </v-form>
@@ -74,11 +81,11 @@ export default {
       }
     }
   },
-  created() {
-    this.onload_methods()
+  created () {
+    this.onload_methods ()
   },
   methods: {
-    onload_methods: function() {
+    onload_methods: function () {
       const UserId = this.$store.getters.useruseid
       const Usertoken = this.$store.getters.usertoken
       this.$store.dispatch('USER_DETAILS', {UserId, Usertoken})
@@ -91,6 +98,14 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    editenable: function () {
+      this.$router.push('/edituser')
+    }
+  },
+  computed: {
+    isDisabled () {
+      return true
     }
   }
 }

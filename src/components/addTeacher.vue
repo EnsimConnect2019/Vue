@@ -4,11 +4,10 @@
       <adminHeader></adminHeader>
       <v-content>
         <v-container
-          fluid
           grid-list-md text-xs-center
         >
           <v-flex xs11>
-            <div class="font-weight-thin my-2 display-1 text-lg-left">
+            <div class="font-weight-thin my-2 display-1 text-lg-left" id="s2">
               Add New Teacher
             </div>
           </v-flex>

@@ -66,13 +66,15 @@ export default {
   data () {
     return {
       titems: [
-        { title: 'Personal Info', url: 'dashboard?value=' + this.$route.query.value, icon: '<font-awesome-icon icon="home" />' },
+        { title: 'Personal Info', url: 'dashboard', icon: '<font-awesome-icon icon="home" />' },
+        { title: 'Change Password', value: 't', url: 'changepassword', icon: '<font-awesome-icon icon="clipboard-user" />' },
         { title: 'My Schedule', value: 't', url: 'schedule', icon: '<font-awesome-icon icon="calendar-alt" />' },
         { title: 'Attendance', value: 't', url: 'attendance', icon: '<font-awesome-icon icon="clipboard-user" />' }
       ],
       pitems: [
-        { title: 'Personal Info', url: 'dashboard?value=' + this.$route.query.value, icon: '<font-awesome-icon icon="home" />' },
-        { title: 'Children List', value: 'p', url: 'students', icon: '<font-awesome-icon icon="clipboard-user" />' }
+        { title: 'Personal Info', url: 'dashboard', icon: '<font-awesome-icon icon="home" />' },
+        { title: 'Change Password', value: 't', url: 'changepassword', icon: '<font-awesome-icon icon="clipboard-user" />' },
+        { title: 'Children List', value: 'p', url: 'childrenlist', icon: '<font-awesome-icon icon="clipboard-user" />' }
       ],
       right: null
     }

@@ -4,12 +4,11 @@
       <adminHeader></adminHeader>
       <v-content>
         <v-container
-          fluid
           grid-list-md text-xs-center
         >
           <v-flex xs11>
-            <div class="font-weight-thin my-2 display-1 text-lg-left">
-              Add New Student
+            <div class="font-weight-thin my-2 display-1 text-lg-left" id="s2">
+              Add New Student {{msg}}
             </div>
           </v-flex>
           <v-layout row wrap>
@@ -19,7 +18,24 @@
               </div>
             </v-flex>
             <v-flex xs11 pl-3>
-              <form>
+              <form class="addStudent" @submit.prevent="addStudent">
+                <v-select
+                  v-model="role"
+                  v-validate="'required'"
+                  :items="itemsSelect"
+                  :error-messages="errors.collect('role')"
+                  label="Select Role"
+                  data-vv-name="role"
+                  required
+                ></v-select>
+                <v-text-field
+                  v-model="username"
+                  v-validate="'required'"
+                  :error-messages="errors.collect('username')"
+                  label="User Name"
+                  data-vv-name="username"
+                  required
+                ></v-text-field>
                 <v-text-field
                   v-model="first_name"
                   v-validate="'required'"
@@ -46,6 +62,7 @@
                 ></v-text-field>
                 <v-text-field
                   v-model="password"
+                  type="password"
                   v-validate="'required|max:30|min:5'"
                   :counter="30"
                   :error-messages="errors.collect('password')"
@@ -53,7 +70,7 @@
                   data-vv-name="password"
                   required
                 ></v-text-field>
-                <v-btn @click="submit">submit</v-btn>
+                <v-btn @click="addStudent">submit</v-btn>
                 <v-btn @click="clear">clear</v-btn>
               </form>
             </v-flex>
@@ -69,6 +86,15 @@ export default {
   name: 'addStudent',
   components: { adminHeader },
   data: () => ({
+    role: null,
+    itemsSelect: [
+      'Teacher',
+      'Student',
+      'Parent',
+      'Admin'
+    ],
+    msg: '',
+    username: '',
     first_name: '',
     last_name: '',
     email: '',
@@ -79,6 +105,13 @@ export default {
         // custom attributes
       },
       custom: {
+        role: {
+          required: 'Select field is required'
+        },
+        username: {
+          required: () => 'User Name can not be empty'
+          // custom messages
+        },
         first_name: {
           required: () => 'First Name can not be empty'
           // custom messages
@@ -99,10 +132,27 @@ export default {
     this.$validator.localize('en', this.dictionary)
   },
   methods: {
-    submit () {
+    addStudent: function () {
       this.$validator.validateAll()
+      const token = this.$store.getters.token
+      let data = {
+        role: this.role,
+        username: this.username,
+        first_name: this.first_name,
+        last_name: this.last_name,
+        email: this.email,
+        password: this.password,
+        token: token
+      }
+      this.$store.dispatch('addStudentStore', data)
+        .then(() => this.$router.push('/studentList'))
+        .catch(err => {
+          this.msg = err.response.data.username
+        })
     },
     clear () {
+      this.role = ''
+      this.username = ''
       this.first_name = ''
       this.last_name = ''
       this.email = ''

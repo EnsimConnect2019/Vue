@@ -4,6 +4,8 @@ import FrontendHome from '@/components/user/FrontendHome'
 import UserLogin from '@/components/user/UserLogin'
 import Dashboard from '@/components/user/Dashboard'
 import ScheduleClass from '@/components/user/ScheduleClass'
+import Childrenlist from '@/components/user/Childrenlist'
+import EdituserDetails from '@/components/user/EdituserDetails'
 import adminLogin from '@/components/adminLogin'
 import adminDashboard from '@/components/adminDashboard'
 import addStudent from '@/components/addStudent'
@@ -44,6 +46,16 @@ export default new Router({
       path: '/schedule',
       name: 'ScheduleClass',
       component: ScheduleClass
+    },
+    {
+      path: '/childrenlist',
+      name: 'Childrenlist',
+      component: EdituserDetails
+    },
+    {
+      path: '/edituser',
+      name: 'EdituserDetails',
+      component: EdituserDetails
     },
     {
       path: '/admin',
