@@ -99,6 +99,7 @@
             console.log(err)
           })
       },
+      //update
       update: function () {
         //alert('ggggg')
         const first_name = this.user.fstname
