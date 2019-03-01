@@ -31,26 +31,25 @@
 </template>
 
 <script>
-export default {
-  name: 'FrontendHeader',
-  data: () => ({
-    items: [
-      { title: 'Parent Login', url: 'userlogin', val: 'p' },
-      { title: 'Teacher Login', url: 'userlogin', val: 't' }
-    ]
-  }),
-  methods: {
-    logout: function () {
-      alert('You want to logout')
-      this.$store.dispatch('logout')
-        .then(() => {
-          this.$router.push('/')
-        })
+  export default {
+    name: 'FrontendHeader',
+    data: () => ({
+      items: [
+        { title: 'Parent Login', url: 'userlogin', val: 'p' },
+        { title: 'Teacher Login', url: 'userlogin', val: 't' }
+      ]
+    }),
+    methods: {
+      logout: function () {
+        alert('You want to logout')
+        this.$store.dispatch('logout')
+          .then(() => {
+            this.$router.push('/')
+          })
+      }
     }
   }
-}
 </script>
 
 <style scoped>
-
 </style>
